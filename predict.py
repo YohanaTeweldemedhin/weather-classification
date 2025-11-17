@@ -1,43 +1,40 @@
+from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
 
+app = Flask(__name__)
 
-def load_model(file_name):   
-   model= joblib.load(file_name)
-   print("Model loaded successfully!")
-   return model
+# Load your model once when the server starts
+model = joblib.load("weather_model.pkl")
+print("Model loaded successfully!")
 
+# Route for prediction
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.get_json()  # Get JSON data from POST request
+    
+    if not data:
+        return jsonify({"error": "No input data provided"}), 400
 
-def predict_weather(model,features):
+    # Convert input to DataFrame
+    if isinstance(data, dict):
+        features = pd.DataFrame([data])
+    elif isinstance(data, list):
+        features = pd.DataFrame(data)
+    else:
+        return jsonify({"error": "Invalid input format"}), 400
 
-    if isinstance(features, dict):
-        features = pd.DataFrame([features])
-    elif isinstance(features, list):
-        features = pd.DataFrame(features)    
-    predictions = model.predict(features)    
-    return predictions
+    # Make prediction
+    try:
+        predictions = model.predict(features)
+        return jsonify({"predictions": predictions.tolist()})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
+# Test route
+@app.route('/')
+def home():
+    return "Weather Prediction API is running!"
 
-features = {
-    "Temperature": 3,
-    "Humidity": 83,
-    "Wind Speed": 6,
-    "Precipitation (%)": 66,
-    "Cloud Cover":"overcast",
-    "Atmospheric Pressure": 999.44,
-    "UV Index": 0,
-    "Visibility (km)": 1,
-    "Season": "Winter",
-    "Location": "mountain"
-}
-model = load_model("weather_model.pkl")
-pred = predict_weather(model,features)
-print("Predicted Weather Type:", pred[0])
-
-
-
-
-   
-
-
-
+if __name__ == "__main__":
+    app.run(debug=True)
