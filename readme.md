@@ -95,4 +95,4 @@ Send JSON data, for example:
 ```
 
 
-![Screenshot](Images/postman_model_output.png)
+![Screenshot](images/postman_model_output.png)
