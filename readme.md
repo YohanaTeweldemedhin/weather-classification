@@ -95,4 +95,4 @@ Send JSON data, for example:
 ```
 
 
-<img src="Images/postman_model_output.png" alt="Screenshot" width="1000">
+![Screenshot](images/postman_model_output.png)
