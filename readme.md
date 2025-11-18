@@ -1,7 +1,8 @@
-# Weather Prediction Application
+# weather_prediction_aplication
 
+## Description
 
-This project is a machine learning–powered Weather Prediction API built using Flask. It loads a trained model (weather_model.pkl) and provides predictions through a REST API endpoint. Users can send weather-related input , and the API responds with predicted weather conditions. This application demonstrates model deployment, API development, and real-time prediction handling. The application accepts the following features as input
+This project is a machine learning–powered Weather Prediction  application. It loads a trained model (weather_model.pkl) and provides predictions through a REST API endpoint. Users can send weather-related input , and the API responds with predicted weather conditions. This application demonstrates model deployment, API development, and real-time prediction handling. The application accepts the following features as input
 
 1. Temperature
 2. Humidity
@@ -14,63 +15,68 @@ This project is a machine learning–powered Weather Prediction API built using 
 9. Season
 10. Location
 
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Deployment](#deployment)
-- [Usage](#usage)
+## Installation
 
+To deploy and use the project first clone it and use the deployment.
 
-## Overview
+### Method 1: using a virtual environment
 
-This project provides a REST API to predict weather conditions based on input features. The API uses a pre-trained machine learning model (`weather_model.pkl`) and returns predictions in JSON format.
-
-Built with:
-- pandas==2.3.2
-- numpy==2.3.3
-- Flask==3.1.2
-- matplotlib==3.10.6
-- seaborn==0.13.2
-- scikit-learn==1.7.2
-- joblib==1.5.2
-
-## Features
-
-- Predict weather using a machine learning model
-- Accepts JSON input with one or multiple records
-- Returns predictions as a JSON response
-- Easy to deploy locally or on a server
-
-### Install Dependencies
-#### --> Install all required packages using:
+#### 1. Install a virtual environment
 
 ```bash
+
+pip install virtualenv
+
+```
+
+#### 2. Create a virtual environment and activate it
+
+```bash
+
+venv\Scripts\activate
+
+```
+
+#### 3. Install the list of libraries in the requirement.txt
+
+```bash
+
 pip install -r requirements.txt
 
 ```
 
-
-### Add the Trained Model
-Place the trained model file **weather_model.pkl** in the project root directory (same folder as `app.py`).
-
-### Run the Flask Application
-
-Start the server with:
+#### 4. run the predict.py file
 
 ```bash
-python app.py
 
-http://127.0.0.1:5000/
-
+python predict.py
 
 ```
 
+And go to the link http://127.0.0.1:5000 from the resulting terminal
 
-### Test the API
+
+### method 2: Using Docker
+
+First install docker in your machine and go to the deployment on your terminal and type the following commands
+
+```bash
+
+docker buil . -t weather_predict
+docker run -p 5000:5000 weather_predict 
+
+```
+The above command will create and run an image for the project.
+
+
+
+### Test the Application
+
+We provide out inputs to the model using Postman and receive the output based on the features provided.
 
 - Root endpoint: `GET /`
 
-Should return: "Weather Prediction API is running!"
+Should return: weather_prediction_application is running!"
 
 - Prediction endpoint: `POST /predict`
 Send JSON data, for example:
@@ -93,6 +99,10 @@ Send JSON data, for example:
 }
 
 ```
-
+OUTPUT
 
 ![Screenshot](images/postman_model_output.PNG)
+
+
+
+
