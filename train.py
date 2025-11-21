@@ -1,25 +1,12 @@
-
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-from sklearn.svm import SVC
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
-import pandas as pd
 from sklearn.ensemble import GradientBoostingClassifier
 import joblib
+
 
 
 def get_data(path):
